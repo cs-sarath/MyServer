@@ -108,9 +108,8 @@ public class Response implements HttpServletResponse {
 	}
 
 	@Override
-	public void addCookie(Cookie arg0) {
-		// TODO Auto-generated method stub
-		
+	public void addCookie(Cookie cookie) {
+		addHeader("Set-Cookie", cookie.getName()+"="+cookie.getValue());
 	}
 
 	@Override
@@ -120,9 +119,15 @@ public class Response implements HttpServletResponse {
 	}
 
 	@Override
-	public void addHeader(String arg0, String arg1) {
-		// TODO Auto-generated method stub
-		
+	public void addHeader(String name, String value) {
+		try
+		{
+			getWriter().write(name+": "+value);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
